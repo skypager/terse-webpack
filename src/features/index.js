@@ -4,6 +4,7 @@ export entry from "./entry";
 export env from "./env";
 export externals from "./externals";
 export loader from "./loader";
+export loaderModules from "./loaderModules";
 export modules from "./modules";
 export node from "./node";
 export output from "./output";

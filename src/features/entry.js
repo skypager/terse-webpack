@@ -1,30 +1,23 @@
 import { isObject, isString } from "lodash";
 import path from "path";
 
-const fromObject = (entries, context = process.cwd()) => {
-  return Object.keys(entries).reduce((acc, key) => {
-    const entry = entries[key];
-    const files = Array.isArray(entry) ? entry : [entry];
+const fromObject = (entries) => (
+  Object.keys(entries).reduce((acc, key) => {
+    const entry = entries[key]
 
     return {
       ...acc,
-      [key]: files.map((file) => {
-        if (file.charAt(0) === ".") {
-          return path.resolve(context, file);
-        }
-
-        return file;
-      }),
+      [key]: Array.isArray(entry) ? entry : [entry],
     };
-  }, {});
-};
+  }, {})
+)
 
-const fromString = (entry, context = process.cwd()) => {
+const fromString = (entry) => {
   const parsed = path.parse(entry);
   const basename = path.basename(parsed.base, parsed.ext).toLowerCase();
 
   return {
-    [basename]: [path.resolve(context, entry)],
+    [basename]: [entry],
   };
 };
 

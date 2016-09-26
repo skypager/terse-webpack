@@ -4,4 +4,4 @@ const entries = {
   existing: [`${process.cwd()}/existing.js`],
 };
 
-module.exports = entry(entries, "./src/client.js");
+module.exports = entry(entries, "src/client.js");

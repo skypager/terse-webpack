@@ -3,7 +3,7 @@ module.exports = `{
   "devtool": "cheap-module-eval-source-map",
   "entry": {
     "client": [
-      "${process.cwd()}/src/client.js"
+      "src/client.js"
     ]
   },
   "module": {

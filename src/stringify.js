@@ -6,9 +6,9 @@ import Plugin from "./Plugin";
 export default function stringify(value) {
   const replacements = [];
 
-  const replace = (replacement) => {
-    return `__REPLACEMENT_${replacements.push(replacement) - 1}__`;
-  };
+  const replace = (replacement) => (
+    `__REPLACEMENT_${replacements.push(replacement) - 1}__`
+  )
 
   const sort = (object) => Object.keys(object).sort().reduce((sorted, key) => {
     sorted[key] = object[key];
@@ -40,11 +40,10 @@ export default function stringify(value) {
 
   return string.replace(
     /(^[\s]+)?"__REPLACEMENT_([\d]+)__"/gm,
-    (match, indent = "", index) => {
-      return `${indent}${replacements[index]}`
+    (match, indent = "", index) => (
+      `${indent}${replacements[index]}`
         .split("\n")
         .join(`\n${indent}`)
-      ;
-    },
-  );
+    ),
+  )
 }

@@ -26,6 +26,11 @@ module.exports = require("../../../../src").api()
   })
   .modules("./lib")
   .target("web")
+  .when((state, getConfig) => (
+    state.target !== 'web'
+  ), (api) => (
+    api.alias('when-not-web','not-web')
+  ))
   .when(["development", "test"], function(api) {
     return api
       .plugin("npm-install-webpack-plugin")

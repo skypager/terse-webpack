@@ -1,7 +1,21 @@
+import defaults from 'lodash/defaults'
+
 export default function loader(existing = {}, loader, ext = ".js", options) {
   if (!arguments.length) {
     return;
   }
+
+  existing = defaults(existing, {
+    '.json': [{
+      loader: 'json',
+    }],
+    '.yml': [{
+      loader: 'json!yaml',
+    }],
+    '.yaml': [{
+      loader: 'json!yaml',
+    }],
+  })
 
   const exts = Array.isArray(ext) ? ext : [ext];
 

@@ -7,4 +7,5 @@ export node from "./node";
 export output from "./output";
 export plugins from "./plugins";
 export resolve from "./resolve";
+export resolveLoader from "./resolveLoader";
 export target from "./target";

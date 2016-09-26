@@ -1,16 +1,12 @@
 import path from 'path'
 
-export default function resolve(state) {
-  const { alias, modules } = state;
+export default function resolveLoader(state) {
+  const { loaderModules } = state;
 
-  const resolve = {};
+  const resolveLoader = {};
 
-  if (alias) {
-    resolve.alias = alias;
-  }
-
-  if (modules) {
-    resolve.modules = modules.map((folder) => {
+  if (loaderModules) {
+    resolveLoader.modules = loaderModules.map((folder) => {
       const { dir } = path.parse(folder);
 
       // e.g. "./lib" => `${context}/lib`
@@ -23,5 +19,5 @@ export default function resolve(state) {
     });
   }
 
-  return resolve;
+  return resolveLoader;
 }

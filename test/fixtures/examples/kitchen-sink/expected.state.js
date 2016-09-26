@@ -2,7 +2,7 @@ module.exports = {
   "context": process.cwd(),
   "entry": {
     "client": [
-      `${process.cwd()}/src/client.js`,
+      `src/client.js`,
     ],
   },
   "env": process.env.NODE_ENV || "development",

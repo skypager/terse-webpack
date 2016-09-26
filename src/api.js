@@ -39,9 +39,9 @@ export default function api(userFeatures, userReducers, history = []) {
     return state;
   };
 
-  const getConfig = () => {
+  const getConfig = (tap) => {
     const state = getState();
-    const config = reduce(reducers, (config, reducer, name) => {
+    let config = reduce(reducers, (config, reducer, name) => {
       const reduced = reducer(state);
 
       if (isUndefined(reduced)) {
@@ -53,6 +53,10 @@ export default function api(userFeatures, userReducers, history = []) {
         [name]: reducer(state),
       };
     }, {});
+
+    if (tap) {
+      config = tap(config)
+    }
 
     Object.defineProperty(config, "toString", {
       value: () => stringify(config),
@@ -67,6 +71,8 @@ export default function api(userFeatures, userReducers, history = []) {
 
     if (env === true || envs.indexOf(NODE_ENV) !== -1) {
       return configure(api(features, reducers, history));
+    } else if (typeof env === 'function' && env(getState(), getConfig)) {
+      return configure(api(features, reducers, history))
     }
 
     return api(features, reducers, history);

@@ -7,6 +7,12 @@ export default function externals(existing = [], ...args) {
   }
 
   const externals = args.map((arg) => {
+    if (arg.match(/package.json$/)) {
+      return require('../helpers/externals')({
+        pkg: require(arg),
+      })
+    }
+
     if (!isString(arg)) {
       return arg;
     }
